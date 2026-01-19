@@ -16,6 +16,15 @@ export default function getCartRouter(args: {
 
   router.get("/:customerId", getHandler(controller.getCart));
   router.post("/:customerId/items", getHandler(controller.addItem));
+  router.put("/:customerId/items", getHandler(controller.updateItemQuantity));
+  router.post(
+    "/:customerId/items/:productId/increment",
+    getHandler(controller.incrementItem),
+  );
+  router.post(
+    "/:customerId/items/:productId/decrement",
+    getHandler(controller.decrementItem),
+  );
   router.delete(
     "/:customerId/items/:productId",
     getHandler(controller.removeItem),

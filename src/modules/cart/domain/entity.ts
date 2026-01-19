@@ -46,6 +46,35 @@ export default class Cart extends Entity<CartProps> {
     }
   }
 
+  incrementItem(productId: string): void {
+    const itemIndex = this.props.items.findIndex(
+      (item) => item.productId === productId,
+    );
+
+    if (itemIndex >= 0) {
+      this.props.items[itemIndex].quantity += 1;
+      this.recalculateTotal();
+      this.props.updatedAt = Date.now();
+    }
+  }
+
+  decrementItem(productId: string): void {
+    const itemIndex = this.props.items.findIndex(
+      (item) => item.productId === productId,
+    );
+
+    if (itemIndex >= 0) {
+      this.props.items[itemIndex].quantity -= 1;
+      if (this.props.items[itemIndex].quantity <= 0) {
+        this.props.items = this.props.items.filter(
+          (item) => item.productId !== productId,
+        );
+      }
+      this.recalculateTotal();
+      this.props.updatedAt = Date.now();
+    }
+  }
+
   removeItem(productId: string): void {
     this.props.items = this.props.items.filter(
       (item) => item.productId !== productId,

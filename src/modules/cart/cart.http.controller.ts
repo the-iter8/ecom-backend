@@ -81,6 +81,73 @@ export default class CartHttpController {
     return Ok(new ApiResponse().ok({ cart: { ...dto, items: enrichedItems } }));
   }
 
+  async updateItemQuantity(
+    req: Request,
+  ): Promise<Result<ApiResponseResult, Error>> {
+    this.logger.info("CartHttpController.updateItemQuantity", {
+      params: req.params,
+      body: req.body,
+    });
+
+    const result = await this.service.updateItemQuantity({
+      customerId: req.params.customerId,
+      productId: req.body.productId,
+      quantity: req.body.quantity,
+    });
+
+    if (result.isErr()) {
+      this.logger.error("Error updating item quantity", {
+        error: result.unwrapErr(),
+      });
+      return result;
+    }
+
+    const dto = this.mapper.toResponseFromDomain(result.unwrap());
+    return Ok(new ApiResponse().ok({ cart: dto }));
+  }
+
+  async incrementItem(req: Request): Promise<Result<ApiResponseResult, Error>> {
+    this.logger.info("CartHttpController.incrementItem", {
+      params: req.params,
+    });
+
+    const result = await this.service.incrementItem({
+      customerId: req.params.customerId,
+      productId: req.params.productId,
+    });
+
+    if (result.isErr()) {
+      this.logger.error("Error incrementing item", {
+        error: result.unwrapErr(),
+      });
+      return result;
+    }
+
+    const dto = this.mapper.toResponseFromDomain(result.unwrap());
+    return Ok(new ApiResponse().ok({ cart: dto }));
+  }
+
+  async decrementItem(req: Request): Promise<Result<ApiResponseResult, Error>> {
+    this.logger.info("CartHttpController.decrementItem", {
+      params: req.params,
+    });
+
+    const result = await this.service.decrementItem({
+      customerId: req.params.customerId,
+      productId: req.params.productId,
+    });
+
+    if (result.isErr()) {
+      this.logger.error("Error decrementing item", {
+        error: result.unwrapErr(),
+      });
+      return result;
+    }
+
+    const dto = this.mapper.toResponseFromDomain(result.unwrap());
+    return Ok(new ApiResponse().ok({ cart: dto }));
+  }
+
   async removeItem(req: Request): Promise<Result<ApiResponseResult, Error>> {
     this.logger.info("CartHttpController.removeItem", { params: req.params });
 

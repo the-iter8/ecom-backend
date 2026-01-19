@@ -142,6 +142,66 @@ export default class CartService {
     return this.cartRepository.update({ entity: cart });
   }
 
+  async incrementItem(args: {
+    customerId: string;
+    productId: string;
+  }): Promise<Result<Cart, Error>> {
+    this.logger.info("CartService.incrementItem", args);
+
+    if (!args.customerId || !args.productId) {
+      return Err(
+        new InvalidArgumentError("customerId and productId are required"),
+      );
+    }
+
+    const cartResult = await this.cartRepository.getByCustomerId({
+      customerId: args.customerId,
+    });
+    if (cartResult.isErr()) {
+      return Err(new ResourceNotFoundError("Cart not found"));
+    }
+
+    const cart = cartResult.unwrap();
+    cart.incrementItem(args.productId);
+
+    const validation = cart.validate();
+    if (!validation.success) {
+      return Err(new BadPayloadError(validation.error.message));
+    }
+
+    return this.cartRepository.update({ entity: cart });
+  }
+
+  async decrementItem(args: {
+    customerId: string;
+    productId: string;
+  }): Promise<Result<Cart, Error>> {
+    this.logger.info("CartService.decrementItem", args);
+
+    if (!args.customerId || !args.productId) {
+      return Err(
+        new InvalidArgumentError("customerId and productId are required"),
+      );
+    }
+
+    const cartResult = await this.cartRepository.getByCustomerId({
+      customerId: args.customerId,
+    });
+    if (cartResult.isErr()) {
+      return Err(new ResourceNotFoundError("Cart not found"));
+    }
+
+    const cart = cartResult.unwrap();
+    cart.decrementItem(args.productId);
+
+    const validation = cart.validate();
+    if (!validation.success) {
+      return Err(new BadPayloadError(validation.error.message));
+    }
+
+    return this.cartRepository.update({ entity: cart });
+  }
+
   async removeItem(args: {
     customerId: string;
     productId: string;
