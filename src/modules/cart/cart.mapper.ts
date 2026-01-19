@@ -6,6 +6,10 @@ export interface CartItemResponseDto {
   productId: string;
   quantity: number;
   priceSnapshot: number;
+  productName?: string;
+  productDescription?: string;
+  productImage?: string;
+  productCategory?: string;
 }
 
 export interface CartResponseDto {

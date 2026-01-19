@@ -20,7 +20,11 @@ export default class CartModule {
     const mapper = new CartMapper();
     this.repository = CartRepository.init(this.mongoDB, mapper);
     this.service = new CartService(this.repository, this.productRepository);
-    this.httpController = new CartHttpController(this.service, mapper);
+    this.httpController = new CartHttpController(
+      this.service,
+      mapper,
+      this.productRepository,
+    );
   }
 
   getRouter(args: { requestTransformer: RequestTransformer }) {
@@ -28,5 +32,9 @@ export default class CartModule {
       cartHttpController: this.httpController,
       requestTransformer: args.requestTransformer,
     });
+  }
+
+  getRepository(): CartRepository {
+    return this.repository;
   }
 }

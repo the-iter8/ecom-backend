@@ -3,7 +3,8 @@ import { Result, Ok } from "oxide.ts";
 import Logger from "@lib/util/logger.js";
 import { ApiResponse } from "@lib/api/index.js";
 import CartService from "./services/cart.service.js";
-import CartMapper from "./cart.mapper.js";
+import CartMapper, { CartItemResponseDto } from "./cart.mapper.js";
+import ProductRepositoryPort from "@modules/product/db/repository.port.js";
 
 type ApiResponseResult =
   | ReturnType<ApiResponse["ok"]>
@@ -16,6 +17,7 @@ export default class CartHttpController {
   constructor(
     private readonly service: CartService,
     private readonly mapper: CartMapper,
+    private readonly productRepository: ProductRepositoryPort,
   ) {}
 
   async addItem(req: Request): Promise<Result<ApiResponseResult, Error>> {
@@ -53,8 +55,30 @@ export default class CartHttpController {
       return result;
     }
 
-    const dto = this.mapper.toResponseFromDomain(result.unwrap());
-    return Ok(new ApiResponse().ok({ cart: dto }));
+    const cart = result.unwrap();
+    const dto = this.mapper.toResponseFromDomain(cart);
+
+    // Enrich items with product details
+    const enrichedItems: CartItemResponseDto[] = await Promise.all(
+      dto.items.map(async (item) => {
+        const productResult = await this.productRepository.getById({
+          id: item.productId,
+        });
+        if (productResult.isOk()) {
+          const product = productResult.unwrap();
+          return {
+            ...item,
+            productName: product.name,
+            productDescription: product.description,
+            productImage: product.image,
+            productCategory: product.category,
+          };
+        }
+        return item;
+      }),
+    );
+
+    return Ok(new ApiResponse().ok({ cart: { ...dto, items: enrichedItems } }));
   }
 
   async removeItem(req: Request): Promise<Result<ApiResponseResult, Error>> {

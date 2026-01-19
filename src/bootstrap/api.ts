@@ -5,6 +5,10 @@ import config from "@conf/app.config.js";
 import requestTransformer from "@lib/middleware/request-transformer.js";
 import ProductModule from "@modules/product/index.js";
 import CartModule from "@modules/cart/index.js";
+import AppConfigModule from "@modules/app-config/index.js";
+import DiscountCodeModule from "@modules/discount-code/index.js";
+import OrderModule from "@modules/order/index.js";
+import AdminModule from "@modules/admin/index.js";
 
 async function bootstrap() {
   const app: Express = express();
@@ -21,15 +25,29 @@ async function bootstrap() {
   // Initialize modules
   const productModule = new ProductModule(mongoDB);
   const cartModule = new CartModule(mongoDB, productModule.getRepository());
+  const appConfigModule = new AppConfigModule(mongoDB);
+  const discountCodeModule = new DiscountCodeModule(mongoDB);
+  const orderModule = new OrderModule(
+    mongoDB,
+    cartModule.getRepository(),
+    appConfigModule.service,
+    discountCodeModule.service,
+  );
+  const adminModule = new AdminModule(
+    appConfigModule.service,
+    discountCodeModule.service,
+  );
 
   // Health check
   app.get("/health", (req, res) => {
     res.json({ status: "ok", timestamp: Date.now() });
   });
 
+  app.use("/api/admin", adminModule.getRouter({ requestTransformer }));
   // Module routers
   app.use("/api/products", productModule.getRouter({ requestTransformer }));
   app.use("/api/cart", cartModule.getRouter({ requestTransformer }));
+  app.use("/api/orders", orderModule.getRouter({ requestTransformer }));
 
   // Start server
   const port = config.server.port;
