@@ -1,6 +1,8 @@
 import express, { Express } from "express";
-import MongoDB from "@lib/db/mongo";
-import config from "@conf/app.config";
+import MongoDB from "@lib/db/mongo.js";
+import config from "@conf/app.config.js";
+import requestTransformer from "@lib/middleware/request-transformer.js";
+import ProductModule from "@modules/product/index.js";
 
 async function bootstrap() {
   const app: Express = express();
@@ -13,12 +15,16 @@ async function bootstrap() {
   const mongoDB = new MongoDB();
   await mongoDB.connect(config.mongodb.uri, config.mongodb.dbName);
 
+  // Initialize modules
+  const productModule = new ProductModule(mongoDB);
+
   // Health check
   app.get("/health", (req, res) => {
     res.json({ status: "ok", timestamp: Date.now() });
   });
 
-  // Module routers will be registered here
+  // Module routers
+  app.use("/api/products", productModule.getRouter({ requestTransformer }));
 
   // Start server
   const port = config.server.port;
