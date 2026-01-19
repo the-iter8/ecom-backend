@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsx --tsconfig tsconfig.json src/bootstrap/api.ts",
     "build": "tsc",
-    "start": "node --loader ts-node/esm dist/bootstrap/api.js",
+    "start": "node dist/bootstrap/api.js",
     "test": "jest"
   },
   "keywords": [
