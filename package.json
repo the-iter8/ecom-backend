@@ -1,0 +1,34 @@
+{
+  "name": "ecom-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Simple ecommerce backend with cart and checkout",
+  "main": "dist/bootstrap/api.js",
+  "scripts": {
+    "dev": "tsx --tsconfig tsconfig.json src/bootstrap/api.ts",
+    "build": "tsc",
+    "start": "node --loader ts-node/esm dist/bootstrap/api.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "ecommerce",
+    "cart",
+    "checkout"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "zod": "^3.22.4",
+    "oxide.ts": "^1.1.0",
+    "nanoid": "^3.3.7",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3",
+    "tsx": "^4.7.0"
+  }
+}
