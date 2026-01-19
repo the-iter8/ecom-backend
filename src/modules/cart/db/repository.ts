@@ -1,8 +1,8 @@
 import { Model } from "mongoose";
 import { Result, Ok, Err } from "oxide.ts";
-import MongooseRepositoryBase from "@lib/ddd/repository.base.js";
-import { ResourceNotFoundError } from "@lib/util/errors.js";
-import MongoDB from "@lib/db/mongo.js";
+import MongooseRepositoryBase from "#lib/ddd/repository.base.js";
+import { ResourceNotFoundError } from "#lib/util/errors.js";
+import MongoDB from "#lib/db/mongo.js";
 import Cart from "../domain/entity.js";
 import { CartDbRecord } from "../domain/type.js";
 import CartMapper from "../cart.mapper.js";

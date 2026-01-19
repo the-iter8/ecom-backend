@@ -1,6 +1,6 @@
 import { Result, Ok, Err } from "oxide.ts";
-import Logger from "@lib/util/logger.js";
-import { InvalidOperationError } from "@lib/util/errors.js";
+import Logger from "#lib/util/logger.js";
+import { InvalidOperationError } from "#lib/util/errors.js";
 import AppConfigService from "../../app-config/services/app-config.service.js";
 import DiscountCodeService from "../../discount-code/services/discount-code.service.js";
 import OrderService from "../../order/services/order.service.js";

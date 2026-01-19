@@ -1,14 +1,14 @@
 import { Result, Ok, Err } from "oxide.ts";
-import Logger from "@lib/util/logger.js";
+import Logger from "#lib/util/logger.js";
 import {
   BadPayloadError,
   InvalidArgumentError,
   ResourceNotFoundError,
   InvalidOperationError,
-} from "@lib/util/errors.js";
+} from "#lib/util/errors.js";
 import Cart from "../domain/entity.js";
 import CartRepositoryPort from "../db/repository.port.js";
-import ProductRepositoryPort from "@modules/product/db/repository.port.js";
+import ProductRepositoryPort from "#modules/product/db/repository.port.js";
 
 export interface AddItemToCartArgs {
   customerId: string;

@@ -4,6 +4,11 @@
   "type": "module",
   "description": "Simple ecommerce backend with cart and checkout",
   "main": "dist/bootstrap/api.js",
+  "imports": {
+    "#lib/*": "./dist/lib/*",
+    "#modules/*": "./dist/modules/*",
+    "#conf/*": "./dist/conf/*"
+  },
   "scripts": {
     "dev": "tsx --tsconfig tsconfig.json src/bootstrap/api.ts",
     "build": "tsc",

@@ -1,4 +1,4 @@
-import Mapper from "@lib/ddd/mapper.interface.js";
+import Mapper from "#lib/ddd/mapper.interface.js";
 import Order from "./domain/entity.js";
 import { OrderDbRecord, OrderItem } from "./domain/type.js";
 

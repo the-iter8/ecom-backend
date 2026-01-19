@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Result } from "oxide.ts";
-import { ApiResponse } from "@lib/api/index.js";
+import { ApiResponse } from "#lib/api/index.js";
 
 type Controller = (req: Request, res: Response) => Promise<Result<any, Error>>;
 

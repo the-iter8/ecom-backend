@@ -1,16 +1,16 @@
 import { Result, Ok, Err } from "oxide.ts";
-import Logger from "@lib/util/logger.js";
+import Logger from "#lib/util/logger.js";
 import {
   BadPayloadError,
   InvalidArgumentError,
   InvalidOperationError,
-} from "@lib/util/errors.js";
+} from "#lib/util/errors.js";
 import Order from "../domain/entity.js";
 import { OrderItem } from "../domain/type.js";
 import OrderRepositoryPort from "../db/repository.port.js";
-import CartRepositoryPort from "@modules/cart/db/repository.port.js";
-import AppConfigService from "@modules/app-config/services/app-config.service.js";
-import DiscountCodeService from "@modules/discount-code/services/discount-code.service.js";
+import CartRepositoryPort from "#modules/cart/db/repository.port.js";
+import AppConfigService from "#modules/app-config/services/app-config.service.js";
+import DiscountCodeService from "#modules/discount-code/services/discount-code.service.js";
 
 export interface CheckoutArgs {
   customerId: string;

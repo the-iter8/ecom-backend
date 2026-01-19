@@ -1,4 +1,4 @@
-import MongoDB from "@lib/db/mongo.js";
+import MongoDB from "#lib/db/mongo.js";
 import ProductMapper from "./product.mapper.js";
 import ProductRepository from "./db/repository.js";
 import ProductService from "./services/product.service.js";

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { EntityProps } from "@lib/ddd/entity.base.js";
+import { EntityProps } from "#lib/ddd/entity.base.js";
 
 export const ProductPropsSchema = z.object({
   id: z.string(),

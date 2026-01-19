@@ -1,5 +1,5 @@
 import { Result } from "oxide.ts";
-import RepositoryPort from "@lib/ddd/repository.port.js";
+import RepositoryPort from "#lib/ddd/repository.port.js";
 import Order from "../domain/entity.js";
 
 export default interface OrderRepositoryPort extends RepositoryPort {

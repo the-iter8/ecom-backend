@@ -1,4 +1,4 @@
-import Mapper from "@lib/ddd/mapper.interface.js";
+import Mapper from "#lib/ddd/mapper.interface.js";
 import DiscountCode from "./domain/entity.js";
 import { DiscountCodeDbRecord } from "./domain/type.js";
 

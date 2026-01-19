@@ -1,5 +1,5 @@
-import ApiResponse from "@lib/api/api-response.js";
-import Logger from "@lib/util/logger.js";
+import ApiResponse from "#lib/api/api-response.js";
+import Logger from "#lib/util/logger.js";
 import { Request } from "express";
 import { Ok, Result } from "oxide.ts";
 import AdminService from "./services/admin.service.js";

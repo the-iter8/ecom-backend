@@ -1,4 +1,4 @@
-import MongoDB from "@lib/db/mongo.js";
+import MongoDB from "#lib/db/mongo.js";
 import DiscountCodeMapper from "./discount-code.mapper.js";
 import DiscountCodeRepository from "./db/repository.js";
 import DiscountCodeService from "./services/discount-code.service.js";

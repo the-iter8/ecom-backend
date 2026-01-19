@@ -1,10 +1,10 @@
-import MongoDB from "@lib/db/mongo.js";
+import MongoDB from "#lib/db/mongo.js";
 import CartMapper from "./cart.mapper.js";
 import CartRepository from "./db/repository.js";
 import CartService from "./services/cart.service.js";
 import CartHttpController from "./cart.http.controller.js";
 import getCartRouter from "./cart.http.router.js";
-import ProductRepositoryPort from "@modules/product/db/repository.port.js";
+import ProductRepositoryPort from "#modules/product/db/repository.port.js";
 
 type RequestTransformer = (controller: any) => any;
 

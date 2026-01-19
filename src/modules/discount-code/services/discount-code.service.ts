@@ -1,6 +1,6 @@
 import { Result, Ok, Err } from "oxide.ts";
-import Logger from "@lib/util/logger.js";
-import { BadPayloadError, InvalidOperationError } from "@lib/util/errors.js";
+import Logger from "#lib/util/logger.js";
+import { BadPayloadError, InvalidOperationError } from "#lib/util/errors.js";
 import DiscountCode from "../domain/entity.js";
 import DiscountCodeRepositoryPort from "../db/repository.port.js";
 

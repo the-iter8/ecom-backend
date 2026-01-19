@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { Result, Ok } from "oxide.ts";
-import Logger from "@lib/util/logger.js";
-import { ApiResponse } from "@lib/api/index.js";
+import Logger from "#lib/util/logger.js";
+import { ApiResponse } from "#lib/api/index.js";
 import OrderService from "./services/order.service.js";
 import OrderMapper from "./order.mapper.js";
 

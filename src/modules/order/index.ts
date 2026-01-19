@@ -1,12 +1,12 @@
-import MongoDB from "@lib/db/mongo.js";
+import MongoDB from "#lib/db/mongo.js";
 import OrderMapper from "./order.mapper.js";
 import OrderRepository from "./db/repository.js";
 import OrderService from "./services/order.service.js";
 import OrderHttpController from "./order.http.controller.js";
 import getOrderRouter from "./order.http.router.js";
-import CartRepositoryPort from "@modules/cart/db/repository.port.js";
-import AppConfigService from "@modules/app-config/services/app-config.service.js";
-import DiscountCodeService from "@modules/discount-code/services/discount-code.service.js";
+import CartRepositoryPort from "#modules/cart/db/repository.port.js";
+import AppConfigService from "#modules/app-config/services/app-config.service.js";
+import DiscountCodeService from "#modules/discount-code/services/discount-code.service.js";
 
 type RequestTransformer = (controller: any) => any;
 

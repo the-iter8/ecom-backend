@@ -1,6 +1,6 @@
 import { Result, Ok, Err } from "oxide.ts";
-import Logger from "@lib/util/logger.js";
-import { BadPayloadError, InvalidArgumentError } from "@lib/util/errors.js";
+import Logger from "#lib/util/logger.js";
+import { BadPayloadError, InvalidArgumentError } from "#lib/util/errors.js";
 import Product from "../domain/entity.js";
 import ProductRepositoryPort, {
   GetAllProductsArgs,

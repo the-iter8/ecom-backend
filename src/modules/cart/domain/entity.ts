@@ -1,5 +1,5 @@
 import { SafeParseReturnType } from "zod";
-import Entity from "@lib/ddd/entity.base.js";
+import Entity from "#lib/ddd/entity.base.js";
 import { CartProps, CartPropsSchema, CartItem } from "./type.js";
 
 export default class Cart extends Entity<CartProps> {

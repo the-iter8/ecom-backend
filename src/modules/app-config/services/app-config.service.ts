@@ -1,6 +1,6 @@
 import { Result, Ok, Err } from "oxide.ts";
-import Logger from "@lib/util/logger.js";
-import { BadPayloadError } from "@lib/util/errors.js";
+import Logger from "#lib/util/logger.js";
+import { BadPayloadError } from "#lib/util/errors.js";
 import AppConfig from "../domain/entity.js";
 import AppConfigRepositoryPort from "../db/repository.port.js";
 

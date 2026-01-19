@@ -1,6 +1,6 @@
 import { Router } from "express";
 import AdminHttpController from "./admin.http.controller.js";
-import requestTransformer from "@lib/middleware/request-transformer.js";
+import requestTransformer from "#lib/middleware/request-transformer.js";
 import { Request, Response } from "express";
 import { Result } from "oxide.ts";
 

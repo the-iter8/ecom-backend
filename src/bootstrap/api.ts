@@ -1,14 +1,14 @@
 import express, { Express } from "express";
 import cors from "cors";
-import MongoDB from "@lib/db/mongo.js";
-import config from "@conf/app.config.js";
-import requestTransformer from "@lib/middleware/request-transformer.js";
-import ProductModule from "@modules/product/index.js";
-import CartModule from "@modules/cart/index.js";
-import AppConfigModule from "@modules/app-config/index.js";
-import DiscountCodeModule from "@modules/discount-code/index.js";
-import OrderModule from "@modules/order/index.js";
-import AdminModule from "@modules/admin/index.js";
+import MongoDB from "#lib/db/mongo.js";
+import config from "#conf/app.config.js";
+import requestTransformer from "#lib/middleware/request-transformer.js";
+import ProductModule from "#modules/product/index.js";
+import CartModule from "#modules/cart/index.js";
+import AppConfigModule from "#modules/app-config/index.js";
+import DiscountCodeModule from "#modules/discount-code/index.js";
+import OrderModule from "#modules/order/index.js";
+import AdminModule from "#modules/admin/index.js";
 
 async function bootstrap() {
   const app: Express = express();

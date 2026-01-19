@@ -1,4 +1,4 @@
-import MongoDB from "@lib/db/mongo.js";
+import MongoDB from "#lib/db/mongo.js";
 import AppConfigMapper from "./app-config.mapper.js";
 import AppConfigRepository from "./db/repository.js";
 import AppConfigService from "./services/app-config.service.js";

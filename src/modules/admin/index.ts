@@ -1,4 +1,4 @@
-import requestTransformer from "@lib/middleware/request-transformer.js";
+import requestTransformer from "#lib/middleware/request-transformer.js";
 import AdminService from "./services/admin.service.js";
 
 type RequestTransformer = typeof requestTransformer;

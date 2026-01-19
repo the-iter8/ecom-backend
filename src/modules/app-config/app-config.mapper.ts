@@ -1,4 +1,4 @@
-import Mapper from "@lib/ddd/mapper.interface.js";
+import Mapper from "#lib/ddd/mapper.interface.js";
 import AppConfig from "./domain/entity.js";
 import { AppConfigDbRecord } from "./domain/type.js";
 

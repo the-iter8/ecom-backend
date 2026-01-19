@@ -1,4 +1,4 @@
-import Mapper from "@lib/ddd/mapper.interface.js";
+import Mapper from "#lib/ddd/mapper.interface.js";
 import Product from "./domain/entity.js";
 import { ProductDbRecord, ProductProps } from "./domain/type.js";
 

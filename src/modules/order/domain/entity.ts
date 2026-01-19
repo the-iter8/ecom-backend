@@ -1,5 +1,5 @@
 import { SafeParseReturnType } from "zod";
-import Entity from "@lib/ddd/entity.base.js";
+import Entity from "#lib/ddd/entity.base.js";
 import { OrderProps, OrderPropsSchema, OrderItem } from "./type.js";
 
 export default class Order extends Entity<OrderProps> {

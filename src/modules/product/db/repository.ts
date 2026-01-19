@@ -1,8 +1,8 @@
 import { Model } from "mongoose";
 import { Result, Ok, Err } from "oxide.ts";
-import MongooseRepositoryBase from "@lib/ddd/repository.base.js";
-import { ResourceNotFoundError } from "@lib/util/errors.js";
-import MongoDB from "@lib/db/mongo.js";
+import MongooseRepositoryBase from "#lib/ddd/repository.base.js";
+import { ResourceNotFoundError } from "#lib/util/errors.js";
+import MongoDB from "#lib/db/mongo.js";
 import Product from "../domain/entity.js";
 import { ProductDbRecord } from "../domain/type.js";
 import ProductMapper from "../product.mapper.js";

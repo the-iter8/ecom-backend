@@ -1,5 +1,5 @@
 import { SafeParseReturnType } from "zod";
-import Entity from "@lib/ddd/entity.base.js";
+import Entity from "#lib/ddd/entity.base.js";
 import { ProductProps, ProductPropsSchema } from "./type.js";
 
 export default class Product extends Entity<ProductProps> {

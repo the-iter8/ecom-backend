@@ -1,4 +1,4 @@
-import Mapper from "@lib/ddd/mapper.interface.js";
+import Mapper from "#lib/ddd/mapper.interface.js";
 import Cart from "./domain/entity.js";
 import { CartDbRecord, CartItem } from "./domain/type.js";
 

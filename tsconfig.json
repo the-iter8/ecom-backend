@@ -13,9 +13,9 @@
     "moduleResolution": "node",
     "baseUrl": "./src",
     "paths": {
-      "@lib/*": ["lib/*"],
-      "@modules/*": ["modules/*"],
-      "@conf/*": ["conf/*"]
+      "#lib/*": ["lib/*"],
+      "#modules/*": ["modules/*"],
+      "#conf/*": ["conf/*"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
