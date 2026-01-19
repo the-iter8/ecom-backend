@@ -39,4 +39,18 @@ export default class AdminHttpController {
 
     return Ok(new ApiResponse().created({ discountCode: result.unwrap() }));
   }
+
+  async getStats(req: Request): Promise<ApiResponseResult> {
+    this.logger.info("AdminHttpController.getStats");
+
+    const result = await this.service.getStats();
+    if (result.isErr()) {
+      this.logger.error("Error getting stats", {
+        error: result.unwrapErr(),
+      });
+      return result;
+    }
+
+    return Ok(new ApiResponse().ok({ stats: result.unwrap() }));
+  }
 }

@@ -36,6 +36,7 @@ async function bootstrap() {
   const adminModule = new AdminModule(
     appConfigModule.service,
     discountCodeModule.service,
+    orderModule.service,
   );
 
   // Health check

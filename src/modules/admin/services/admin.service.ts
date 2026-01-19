@@ -3,6 +3,7 @@ import Logger from "@lib/util/logger.js";
 import { InvalidOperationError } from "@lib/util/errors.js";
 import AppConfigService from "../../app-config/services/app-config.service.js";
 import DiscountCodeService from "../../discount-code/services/discount-code.service.js";
+import OrderService from "../../order/services/order.service.js";
 
 export default class AdminService {
   private readonly logger = new Logger("AdminService");
@@ -10,6 +11,7 @@ export default class AdminService {
   constructor(
     private readonly appConfigService: AppConfigService,
     private readonly discountCodeService: DiscountCodeService,
+    private readonly orderService: OrderService,
   ) {}
 
   async getConfig(): Promise<
@@ -73,6 +75,75 @@ export default class AdminService {
     return Ok({
       code: codeResult.unwrap().code,
       discountPercent: config.discountPercent,
+    });
+  }
+
+  async getStats(): Promise<
+    Result<
+      {
+        totalOrders: number;
+        totalItemsPurchased: number;
+        totalPurchaseAmount: number;
+        discountCodes: Array<{
+          code: string;
+          isUsed: boolean;
+          generatedAtOrderNumber: number;
+          discountPercent: number;
+        }>;
+        totalDiscountAmount: number;
+      },
+      Error
+    >
+  > {
+    this.logger.info("AdminService.getStats");
+
+    // Get all orders
+    const ordersResult = await this.orderService.getAllOrders();
+    if (ordersResult.isErr()) {
+      return ordersResult;
+    }
+
+    const orders = ordersResult.unwrap();
+    const totalOrders = orders.length;
+
+    // Calculate total items purchased
+    const totalItemsPurchased = orders.reduce(
+      (sum, order) =>
+        sum + order.items.reduce((itemSum, item) => itemSum + item.quantity, 0),
+      0,
+    );
+
+    // Calculate total purchase amount
+    const totalPurchaseAmount = orders.reduce(
+      (sum, order) => sum + order.totalAmount,
+      0,
+    );
+
+    // Calculate total discount amount
+    const totalDiscountAmount = orders.reduce(
+      (sum, order) => sum + order.discountAmount,
+      0,
+    );
+
+    // Get all discount codes
+    const codesResult = await this.discountCodeService.getAll();
+    if (codesResult.isErr()) {
+      return codesResult;
+    }
+
+    const discountCodes = codesResult.unwrap().map((code) => ({
+      code: code.code,
+      isUsed: code.isUsed,
+      generatedAtOrderNumber: code.generatedAtOrderNumber,
+      discountPercent: code.discountPercent,
+    }));
+
+    return Ok({
+      totalOrders,
+      totalItemsPurchased,
+      totalPurchaseAmount,
+      discountCodes,
+      totalDiscountAmount,
     });
   }
 }

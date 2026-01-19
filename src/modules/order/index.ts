@@ -12,7 +12,7 @@ type RequestTransformer = (controller: any) => any;
 
 export default class OrderModule {
   private readonly repository: OrderRepository;
-  private readonly service: OrderService;
+  public readonly service: OrderService;
   public readonly httpController: OrderHttpController;
 
   constructor(

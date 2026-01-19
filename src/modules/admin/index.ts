@@ -6,6 +6,7 @@ import AdminHttpController from "./admin.http.controller.js";
 import getAdminRouter from "./admin.http.router.js";
 import AppConfigService from "../app-config/services/app-config.service.js";
 import DiscountCodeService from "../discount-code/services/discount-code.service.js";
+import OrderService from "../order/services/order.service.js";
 
 export default class AdminModule {
   private readonly service: AdminService;
@@ -14,8 +15,13 @@ export default class AdminModule {
   constructor(
     appConfigService: AppConfigService,
     discountCodeService: DiscountCodeService,
+    orderService: OrderService,
   ) {
-    this.service = new AdminService(appConfigService, discountCodeService);
+    this.service = new AdminService(
+      appConfigService,
+      discountCodeService,
+      orderService,
+    );
     this.httpController = new AdminHttpController(this.service);
   }
 

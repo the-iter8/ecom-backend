@@ -21,6 +21,7 @@ export default function getAdminRouter(args: {
     "/discount-codes/generate",
     getHandler(controller.generateDiscountCode),
   );
+  router.get("/stats", getHandler(controller.getStats));
 
   return router;
 }
