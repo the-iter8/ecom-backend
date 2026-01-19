@@ -1,13 +1,16 @@
 import express, { Express } from "express";
+import cors from "cors";
 import MongoDB from "@lib/db/mongo.js";
 import config from "@conf/app.config.js";
 import requestTransformer from "@lib/middleware/request-transformer.js";
 import ProductModule from "@modules/product/index.js";
+import CartModule from "@modules/cart/index.js";
 
 async function bootstrap() {
   const app: Express = express();
 
   // Middleware
+  app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
@@ -17,6 +20,7 @@ async function bootstrap() {
 
   // Initialize modules
   const productModule = new ProductModule(mongoDB);
+  const cartModule = new CartModule(mongoDB, productModule.getRepository());
 
   // Health check
   app.get("/health", (req, res) => {
@@ -25,6 +29,7 @@ async function bootstrap() {
 
   // Module routers
   app.use("/api/products", productModule.getRouter({ requestTransformer }));
+  app.use("/api/cart", cartModule.getRouter({ requestTransformer }));
 
   // Start server
   const port = config.server.port;

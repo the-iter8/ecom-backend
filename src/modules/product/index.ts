@@ -19,6 +19,10 @@ export default class ProductModule {
     this.httpController = new ProductHttpController(this.service, mapper);
   }
 
+  getRepository(): ProductRepository {
+    return this.repository;
+  }
+
   getRouter(args: { requestTransformer: RequestTransformer }) {
     return getProductRouter({
       productHttpController: this.httpController,
