@@ -33,6 +33,10 @@ export default class AppConfig extends Entity<AppConfigProps> {
     return this.props.totalOrderCount % this.props.nthOrderValue === 0;
   }
 
+  canGenerateDiscountNow(): boolean {
+    return (this.props.totalOrderCount + 1) % this.props.nthOrderValue === 0;
+  }
+
   updateNthValue(value: number): void {
     this.props.nthOrderValue = value;
     this.props.updatedAt = Date.now();

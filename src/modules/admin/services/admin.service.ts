@@ -33,7 +33,7 @@ export default class AdminService {
     }
 
     const config = configResult.unwrap();
-    const canGenerateDiscount = config.shouldGenerateDiscount();
+    const canGenerateDiscount = config.canGenerateDiscountNow();
 
     return Ok({
       nthOrderValue: config.nthOrderValue,
@@ -55,16 +55,20 @@ export default class AdminService {
 
     const config = configResult.unwrap();
 
-    if (!config.shouldGenerateDiscount()) {
+    if (!config.canGenerateDiscountNow()) {
+      const nextNthOrder =
+        Math.ceil((config.totalOrderCount + 1) / config.nthOrderValue) *
+        config.nthOrderValue;
       return Err(
         new InvalidOperationError(
-          `Cannot generate discount code. Current order count: ${config.totalOrderCount}, nth value: ${config.nthOrderValue}. Next discount at order ${Math.ceil(config.totalOrderCount / config.nthOrderValue) * config.nthOrderValue}`,
+          `Cannot generate discount code. Current order count: ${config.totalOrderCount}, nth value: ${config.nthOrderValue}. Next discount at order ${nextNthOrder}`,
         ),
       );
     }
 
+    const nextOrderNumber = config.totalOrderCount + 1;
     const codeResult = await this.discountCodeService.generateCode({
-      orderNumber: config.totalOrderCount,
+      orderNumber: nextOrderNumber,
       discountPercent: config.discountPercent,
     });
 
